@@ -1,4 +1,8 @@
+import asyncio
+
 import flet as ft
+
+from voice_generator import generate_audio
 
 class VoiceApp:
     def __init__(self, page: ft.Page):
@@ -6,6 +10,9 @@ class VoiceApp:
         self.page.title = "Text to Speech Manager"
         self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
         self.page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+        self.page.window.width = 620
+        self.page.window.height = 500
+        self.page.window.resizable = False
 
         self.is_playing = False
 
@@ -64,7 +71,7 @@ class VoiceApp:
         self.page.add(self.buttons)
 
     def convert_button_handler(self, e):
-        pass
+        output_file = asyncio.run(generate_audio(self.text_field.value))
 
     def play_button_handler(self, e):
         self.is_playing = not self.is_playing

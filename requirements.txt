@@ -1,0 +1,2 @@
+flet
+edge-tts>=7.0.0
